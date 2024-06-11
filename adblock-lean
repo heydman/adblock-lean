@@ -597,7 +597,7 @@ resume()
 check_for_updates()
 {
 	sha256sum_adblock_lean_local=$(sha256sum /etc/init.d/adblock-lean | awk '{print $1}')
-	sha256sum_adblock_lean_remote=$(uclient-fetch https://raw.githubusercontent.com/lynxthecat/adblock-lean/master/adblock-lean -O - 2> /tmp/uclient-fetch_err | sha256sum | awk '{print $1}')
+	sha256sum_adblock_lean_remote=$(uclient-fetch https://raw.githubusercontent.com/heydman/adblock-lean/update/adblock-lean -O - 2> /tmp/uclient-fetch_err | sha256sum | awk '{print $1}')
 
 	if grep -q "Download completed" /tmp/uclient-fetch_err
 	then
@@ -617,7 +617,7 @@ check_for_updates()
 update()
 {
         log_msg "Obtaining latest version of adblock-lean."
-        uclient-fetch https://raw.githubusercontent.com/lynxthecat/adblock-lean/master/adblock-lean -O /tmp/adblock-lean.latest 1> /dev/null 2> /tmp/uclient-fetch_err
+        uclient-fetch https://raw.githubusercontent.com/heydman/adblock-lean/update/adblock-lean -O /tmp/adblock-lean.latest 1> /dev/null 2> /tmp/uclient-fetch_err
 	if grep -q "Download completed" /tmp/uclient-fetch_err
 	then
 		mv -f /tmp/adblock-lean.latest /etc/init.d/adblock-lean
